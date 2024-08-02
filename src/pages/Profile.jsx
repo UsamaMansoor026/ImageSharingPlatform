@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
 import { UserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const navigate = useNavigate();
