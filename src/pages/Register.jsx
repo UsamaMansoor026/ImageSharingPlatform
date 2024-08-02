@@ -5,6 +5,7 @@ import { auth, db, storage } from "../firebase";
 import { toast } from "react-toastify";
 import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import uploadArea from "../assets/upload_area.png";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -88,9 +89,17 @@ const Register = () => {
           <input
             type="file"
             name="profileimg"
+            id="profileimg"
             required
             onChange={(e) => setImageFile(e.target.files[0])}
           />
+          <label htmlFor="profileimg">
+            <span>Upload your profile image:</span>
+            <img
+              src={imgFile ? URL.createObjectURL(imgFile) : uploadArea}
+              alt=""
+            />
+          </label>
           <input
             type="text"
             name="name"

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Home from "./Home";
 import Footer from "../components/Footer";
 import Profile from "./Profile";
+import CreatePost from "./CreatePost";
 
 const Layout = () => {
   return (
@@ -12,6 +13,7 @@ const Layout = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="profile/:userid" element={<Profile />} />
+        <Route path="create" element={<CreatePost />} />
       </Routes>
 
       <Footer />

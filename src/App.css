@@ -8,6 +8,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+section {
+  min-height: calc(100vh - 90px);
+}
+
+footer {
+  background-color: var(--secondary);
+  color: var(--text);
+  padding: 30px 0;
+
+  p {
+    text-align: center;
+    font-size: 19px;
+  }
 }
 
 .registerLogin {
@@ -63,6 +79,27 @@
   }
 }
 
+#profileimg {
+  display: none;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+label span {
+  color: #ffffff75;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+label img {
+  width: 120px;
+}
+
 .form button {
   width: 100%;
   padding: 9px 14px;
@@ -107,10 +144,64 @@ body {
 
 nav {
   background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
 }
 
-nav button {
+nav h1 {
+  color: var(--text);
+  font-size: 36px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.navlink {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 600;
+  transition: 200ms;
+  position: relative;
+}
+
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 3px;
+  width: 0%;
   background-color: var(--primary);
+  transition: 200ms;
+}
+
+.navlink:hover {
+  color: #ffffff75;
+}
+
+.navlink:hover::after {
+  width: 100%;
+}
+
+nav .links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav img {
+  width: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn {
+  background-color: var(--secondary);
   border: none;
   padding: 19px;
   color: var(--text);

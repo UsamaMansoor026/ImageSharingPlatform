@@ -1,30 +1,15 @@
-import { signOut } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import { UserContext } from "../context/UserContext";
 import { doc, getDoc } from "firebase/firestore";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { handleRemoveUser, JSONData } = useContext(UserContext);
+  const { JSONData } = useContext(UserContext);
 
   const user = JSONData();
   const [currentUser, setCurrentUser] = useState("");
-
-  const handleSignOut = async () => {
-    await signOut(auth)
-      .then(() => {
-        handleRemoveUser();
-        toast.success("Successfully signed out");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("An error occurred");
-      });
-    navigate("/login");
-  };
 
   useEffect(() => {
     const getCurrentUser = async (user) => {
@@ -43,6 +28,22 @@ const Navbar = () => {
 
   return (
     <nav>
+      <Link className="link" to="/main">
+        <h1>SnapDrop</h1>
+      </Link>
+
+      <ul className="links">
+        <li>
+          <Link className="navlink" to="/main">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link className="navlink" to="/main/create">
+            Create Post
+          </Link>
+        </li>
+      </ul>
       <div>
         <img
           onClick={() => navigate(`/main/profile/${user?.uid}`)}
@@ -50,8 +51,6 @@ const Navbar = () => {
           alt=""
         />
       </div>
-
-      <button onClick={handleSignOut}>SignOut</button>
     </nav>
   );
 };
