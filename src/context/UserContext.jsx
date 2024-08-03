@@ -10,7 +10,6 @@ export const UserContextProvider = ({ children }) => {
     const stringUser = JSON.stringify(user);
     setUserStatus(user);
     localStorage.setItem("user", stringUser);
-    console.log(localStorage.getItem("user"));
   };
 
   const handleRemoveUser = () => {

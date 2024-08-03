@@ -24,6 +24,7 @@ const CreatePost = () => {
     caption: "",
     authorid: author.uid,
     authorname: "",
+    authorprofile: "",
     postlikedby: [],
     posttimestamp: serverTimestamp(),
   });
@@ -60,7 +61,12 @@ const CreatePost = () => {
     const snapDoc = await getDoc(docRef);
     if (snapDoc.exists()) {
       const name = snapDoc.data().name;
-      setData((prev) => ({ ...prev, authorname: name }));
+      const profile = snapDoc.data().profileimg;
+      setData((prev) => ({
+        ...prev,
+        authorname: name,
+        authorprofile: profile,
+      }));
     } else {
       console.log("Error Occured");
     }

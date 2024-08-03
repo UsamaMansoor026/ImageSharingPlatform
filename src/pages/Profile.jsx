@@ -1,10 +1,18 @@
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
 import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
+import PostCard from "../components/PostCard";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -14,7 +22,9 @@ const Profile = () => {
     name: "",
     profileimg: "",
   });
+  const [posts, setPosts] = useState([]);
 
+  /* Handling The User Sign out Process */
   const handleSignOut = async () => {
     await signOut(auth)
       .then(() => {
@@ -26,6 +36,22 @@ const Profile = () => {
         toast.error("An error occurred");
       });
     navigate("/login");
+  };
+
+  /* Function to getting all the user posts */
+  const gettingAllUserPosts = async (userid) => {
+    const q = query(collection(db, "posts"), where("authorid", "==", userid));
+    const querySnapshot = await getDocs(q);
+    const allPosts = querySnapshot.docs.map((docc) => ({
+      authorid: docc.data().authorid,
+      authorname: docc.data().authorname,
+      authorprofile: docc.data().authorprofile,
+      caption: docc.data().caption,
+      postimg: docc.data().postimg,
+      posttimestamp: docc.data().posttimestamp,
+    }));
+
+    setPosts(allPosts);
   };
 
   useEffect(() => {
@@ -44,14 +70,24 @@ const Profile = () => {
       }
     };
     getAuthorDetails(userid);
+    gettingAllUserPosts(userid);
   }, []);
   return (
-    <section>
-      <h1>{author.name}</h1>
-      <img src={author.profileimg} alt="" />
-      <button onClick={handleSignOut} className="btn">
-        SignOut
-      </button>
+    <section className="container">
+      <div className="author">
+        <img src={author.profileimg} alt="" />
+        <h1>{author.name}</h1>
+        <button onClick={handleSignOut} className="signOut_btn">
+          SignOut
+        </button>
+      </div>
+      <hr className="hr" />
+
+      {/* all posts */}
+      <div className="post_container">
+        {posts &&
+          posts.map((post, index) => <PostCard item={post} index={index} />)}
+      </div>
     </section>
   );
 };

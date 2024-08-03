@@ -15,6 +15,18 @@ section {
   min-height: calc(100vh - 90px);
 }
 
+.container {
+  max-width: 800px;
+  margin-inline: auto;
+  padding: 26px 0px;
+  position: relative;
+}
+
+.section_heading {
+  font-size: 29px;
+  margin-bottom: 20px;
+}
+
 footer {
   background-color: var(--secondary);
   color: var(--text);
@@ -200,15 +212,18 @@ nav img {
   cursor: pointer;
 }
 
-.btn {
+.signOut_btn {
   background-color: var(--secondary);
   border: none;
-  padding: 19px;
+  padding: 12px 30px;
   color: var(--text);
   font-weight: 500;
   font-size: 23px;
   border-radius: 10px;
   transition: 200ms;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 10px var(--secondary);
@@ -281,6 +296,81 @@ nav img {
   label img {
     width: 80%;
   }
+}
+
+/* Post Card */
+.post_container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.postCard {
+  padding: 20px;
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+}
+
+.hr {
+  border: none;
+  height: 1px;
+  background-color: var(--secondary);
+  margin-bottom: 14px;
+}
+
+.author_details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block: 14px;
+  width: fit-content;
+}
+
+.author_details img {
+  border-radius: 50%;
+  width: 50px;
+  cursor: pointer;
+}
+
+.postCaption {
+  margin-block: 14px;
+  font-size: 19px;
+  color: #ffffffd3;
+}
+
+.postImg {
+  width: 100%;
+  aspect-ratio: 2/1;
+  object-fit: cover;
+}
+
+/* Author Details in Profile Page */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-block: 20px;
+}
+
+.author img {
+  border-radius: 20px;
+  width: 120px;
+  border: 1px solid var(--secondary);
+  padding: 6px;
+  transition: 190ms;
+  cursor: pointer;
+}
+
+.author img:hover {
+  padding: 0;
+}
+
+.author h1 {
+  color: #ffffff7b;
 }
 
 /* Media Queries */
