@@ -327,7 +327,22 @@ nav img {
   align-items: center;
   gap: 1rem;
   margin-block: 14px;
-  width: fit-content;
+  position: relative;
+}
+
+.trash {
+  position: absolute;
+  right: 0px;
+  font-size: 26px;
+  color: red;
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #ffffff3f;
+  cursor: pointer;
 }
 
 .author_details img {
