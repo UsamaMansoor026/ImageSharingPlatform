@@ -29,6 +29,7 @@ const Home = () => {
       caption: doc.data().caption,
       postimg: doc.data().postimg,
       posttimestamp: doc.data().posttimestamp,
+      likedBy: doc.data().postlikedby,
     }));
 
     setPosts(allPosts);
@@ -36,6 +37,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllPostsFromDB();
+    console.log(posts);
   }, []);
   return (
     <section className="container">

@@ -1,12 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { UserContext } from "../context/UserContext";
 import { doc, getDoc } from "firebase/firestore";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { handleRemoveUser } = useContext(UserContext);
   const { JSONData } = useContext(UserContext);
+
+  /* Handling The User Sign out Process */
+  const handleSignOut = async () => {
+    await signOut(auth)
+      .then(() => {
+        handleRemoveUser();
+        toast.success("Successfully signed out");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("An error occurred");
+      });
+    navigate("/login");
+  };
 
   const user = JSONData();
   const [currentUser, setCurrentUser] = useState("");
@@ -42,6 +59,9 @@ const Navbar = () => {
           <Link className="navlink" to="/main/create">
             Create Post
           </Link>
+        </li>
+        <li>
+          <button onClick={handleSignOut}>SignOut</button>
         </li>
       </ul>
       <div>

@@ -361,6 +361,7 @@ nav img {
   width: 100%;
   aspect-ratio: 2/1;
   object-fit: cover;
+  cursor: pointer;
 }
 
 /* Author Details in Profile Page */
@@ -388,7 +389,78 @@ nav img {
   color: #ffffff7b;
 }
 
+/* Modal */
+.modal_container {
+  position: fixed;
+  left: 0px;
+  right: 0;
+  top: 0px;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  animation: fadeIn 600ms;
+}
+
+.model {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  border: 1px solid #fff;
+  padding: 100px;
+}
+
+.modal h1 {
+  cursor: pointer;
+  font-size: 37px;
+  position: absolute;
+  right: 80px;
+  top: 10px;
+}
+
+.modal h3 {
+  text-align: center;
+  margin-block: 23px;
+}
+
+.modal img {
+  width: 50%;
+  border: 1px solid #fff;
+  margin-inline: auto;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/*  */
+.btn__like_wrapper {
+  margin-block: 10px;
+
+  button {
+    padding: 8px 34px;
+    background-color: var(--secondary);
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+}
+
 /* Media Queries */
+@media (max-width: 801px) {
+  .container {
+    max-width: 97%;
+  }
+}
+
 @media (max-width: 465px) {
   .registerLogin_content {
     max-width: 90%;

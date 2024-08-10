@@ -49,6 +49,7 @@ const Profile = () => {
       caption: docc.data().caption,
       postimg: docc.data().postimg,
       posttimestamp: docc.data().posttimestamp,
+      likedBy: docc.data().postlikedby,
     }));
 
     setPosts(allPosts);
