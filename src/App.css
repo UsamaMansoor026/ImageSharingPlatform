@@ -463,6 +463,10 @@ nav img {
   align-items: center;
   gap: 8px;
 
+  span:nth-of-type(1) {
+    margin-top: 3px;
+  }
+
   span {
     font-size: 20px;
   }
