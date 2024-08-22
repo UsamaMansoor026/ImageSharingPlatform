@@ -11,6 +11,10 @@
   font-family: sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 section {
   min-height: calc(100vh - 90px);
 }
@@ -454,6 +458,16 @@ nav img {
   }
 }
 
+.like_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 20px;
+  }
+}
+
 /* Media Queries */
 @media (max-width: 801px) {
   .container {
@@ -465,4 +479,30 @@ nav img {
   .registerLogin_content {
     max-width: 90%;
   }
+}
+
+/* Circls's */
+.circle {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.circle_one {
+  width: 400px;
+  top: 180px;
+  left: -140px;
+  background-color: #00607394;
+  box-shadow: 0 0 70px #00607394;
+  backdrop-filter: blur(20px);
+  position: absolute;
+}
+
+.circle_two {
+  width: 550px;
+  top: 180px;
+  right: -180px;
+  background-color: #13007394;
+  box-shadow: 0 0 70px #13007394;
+  backdrop-filter: blur(20px);
+  position: absolute;
 }

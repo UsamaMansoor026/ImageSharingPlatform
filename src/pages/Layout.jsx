@@ -10,6 +10,8 @@ const Layout = () => {
   return (
     <>
       <Navbar />
+      <span className="circle circle_one"></span>
+      <span className="circle circle_two"></span>
       <Routes>
         <Route index element={<Home />} />
         <Route path="profile/:userid" element={<Profile />} />

@@ -43,6 +43,7 @@ const Profile = () => {
     const q = query(collection(db, "posts"), where("authorid", "==", userid));
     const querySnapshot = await getDocs(q);
     const allPosts = querySnapshot.docs.map((docc) => ({
+      id: docc.id,
       authorid: docc.data().authorid,
       authorname: docc.data().authorname,
       authorprofile: docc.data().authorprofile,

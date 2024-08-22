@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 const PostCard = ({ item, index, handleDelete }) => {
   const [postModal, setPostModal] = useState(false);
+  const [alreadyLike, setAlreadyLike] = useState(false);
   const [likes, setLikes] = useState(0);
   const [likedArray, setLikedArray] = useState([]);
   const [singlePostDetail, setSinglePostDetail] = useState({
@@ -30,32 +31,50 @@ const PostCard = ({ item, index, handleDelete }) => {
 
   /* Handle Like Button Funtionality */
   const handleLike = async (index) => {
-    // const postData = await getDoc(doc(db, "posts", index));
-    const likedArr = likedArray;
-    likedArr.push(user.uid);
-    const docRef = doc(db, "posts", index);
-    await updateDoc(docRef, { postlikedby: likedArr })
-      .then(() => {
-        toast.success("Liked");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("An error occurred");
-      });
-    setLikes(likedArr.length);
+    // Check if user has already liked the post
+    if (likedArray.includes(user.uid)) {
+      setAlreadyLike(true);
+      toast.error("You have already liked this post!");
+      return;
+    }
+
+    try {
+      // Create a copy of likedArray and add the user's ID
+      const likedArr = [...likedArray, user.uid];
+
+      // Reference to the Firestore document
+      const docRef = doc(db, "posts", index);
+
+      // Update the document with the new liked array
+      await updateDoc(docRef, { postlikedby: likedArr });
+
+      // Update the state with the new liked array and likes count
+      setLikedArray(likedArr);
+      setLikes(likedArr.length);
+
+      // Show success message
+      toast.success("Liked");
+    } catch (err) {
+      // Handle errors
+      console.error("Error liking the post:", err);
+      toast.error("An error occurred");
+    }
   };
 
   /* UseEffect */
   useEffect(() => {
     const getLikedInfo = async () => {
-      const postData = await getDoc(doc(db, "posts", item.id));
-      if (postData.exists) {
-        setLikedArray(postData.data().postlikedby || []);
-        setLikes(postData.data().postlikedby?.length || 0);
+      try {
+        const postData = await getDoc(doc(db, "posts", item.id));
+        if (postData.exists()) {
+          setLikedArray(postData.data().postlikedby || []);
+          setLikes(postData.data().postlikedby?.length || 0);
+        }
+      } catch (error) {
+        console.error("Error fetching liked info: ", error);
       }
     };
-    /* Clean up information */
-    return () => getLikedInfo();
+    getLikedInfo();
   }, [item.id]);
 
   /*  */
@@ -67,7 +86,7 @@ const PostCard = ({ item, index, handleDelete }) => {
       }
     });
 
-    return () => cleanup();
+    cleanup();
   }, []);
 
   return (
@@ -99,8 +118,19 @@ const PostCard = ({ item, index, handleDelete }) => {
         />
         {/* Like Button */}
         <div className="btn__like_wrapper">
-          <button onClick={() => handleLike(index)} type="button">
-            Likes: {likes}
+          <button
+            className="like_btn"
+            onClick={() => handleLike(index)}
+            type="button"
+          >
+            <span>
+              {alreadyLike ? (
+                <ion-icon name="thumbs-up"></ion-icon>
+              ) : (
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+              )}
+            </span>{" "}
+            <span>{likes}</span>
           </button>
         </div>
       </article>
